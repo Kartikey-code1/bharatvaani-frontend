@@ -1,0 +1,2 @@
+import { useParams } from 'react-router-dom'; import NewsCard from '../components/NewsCard.jsx';
+export default function Category(){const {name}=useParams(); const items=[1,2,3,4].map(i=>({headline:`${name} news headline ${i}`,category:name,slug:`${name}-${i}`,shortDescription:'Category wise latest updates.'})); return <main className="max-w-7xl mx-auto p-4"><h1 className="text-4xl font-black my-6 capitalize">{name}</h1><section className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">{items.map((n,i)=><NewsCard key={i} item={n}/>)}</section></main>}

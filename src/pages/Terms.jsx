@@ -1,0 +1,1 @@
+export default function Terms(){return <main className='max-w-4xl mx-auto p-6 bg-white rounded-3xl shadow mt-8'><h1 className='text-4xl font-black'>Terms & Conditions</h1><p className='mt-4'>Website use karte waqt legal aur ethical guidelines follow karni hongi.</p></main>}

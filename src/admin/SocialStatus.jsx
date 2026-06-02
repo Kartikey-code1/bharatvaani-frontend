@@ -1,0 +1,1 @@
+export default function SocialStatus(){return <main className='max-w-6xl mx-auto p-6 bg-white rounded-3xl shadow mt-8'><h1 className='text-4xl font-black'>Social Posting Status</h1><p className='text-slate-600 mt-3'>This admin screen is ready for backend API integration.</p></main>}
