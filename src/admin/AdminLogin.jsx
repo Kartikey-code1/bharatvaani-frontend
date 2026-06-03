@@ -1,78 +1,128 @@
 import { useState } from "react";
-import { api } from "../services/api"; // Ye zaroori hai!
 
-export default function AdminLogin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+export default function Dashboard() {
+  const [article, setArticle] = useState({
+    title: "",
+    category: "Politics",
+    content: "",
+    image: null,
+    video: null,
+  });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+  const handlePublish = async () => {
+    if (!article.title || !article.content) {
+      alert("⚠️ Title aur Content fill karna zaroori hai!");
+      return;
+    }
+
     setLoading(true);
-
     try {
-     // AdminLogin.jsx ke andar:
-const response = await api.post("/api/admin/login", { 
-  email, 
-  password 
-});
+      const formData = new FormData();
+      formData.append("title", article.title);
+      formData.append("category", article.category);
+      formData.append("content", article.content);
 
-      // Axios mein response data seedha .data mein hota hai
-      const data = response.data;
+      if (article.image) formData.append("image", article.image);
+      if (article.video) formData.append("video", article.video);
 
-      // Successful login
-      localStorage.setItem("adminToken", data.token);
-      alert("Login Successful! 🎉");
-      
-      window.location.href = "/admin/dashboard"; 
+      // Fixed: Relative path use kiya hai taaki deployment mein 404 na aaye
+      const response = await fetch("/api/articles", {
+        method: "POST",
+        body: formData,
+      });
 
-    } catch (err) {
-      // Axios error handle karne ka tareeka
-      setError(err.response?.data?.message || "Login failed! Please check credentials.");
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        alert("✅ Article Published Successfully!");
+        setArticle({
+          title: "",
+          category: "Politics",
+          content: "",
+          image: null,
+          video: null,
+        });
+      } else {
+        alert(data.message || "❌ Publish Failed: Backend error");
+      }
+    } catch (error) {
+      console.error("Fetch Error:", error);
+      alert("❌ Server Error: Backend se connect nahi ho pa raha.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="max-w-md mx-auto bg-white mt-12 p-6 rounded-3xl shadow">
-      <h1 className="text-3xl font-black mb-4">Admin Login</h1>
-      
-      {error && (
-        <div className="bg-red-50 text-red-600 p-3 rounded mb-3 text-sm font-semibold border border-red-200">
-          {error}
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit}>
-        <input 
-          className="border p-3 rounded w-full mb-3 focus:outline-red-700" 
-          placeholder="Email"
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-6">Admin Dashboard</h1>
+
+      <div className="grid md:grid-cols-4 gap-4 mb-8">
+        {["Total Articles", "Published", "Drafts", "Subscribers"].map((item) => (
+          <div key={item} className="bg-white shadow rounded-xl p-4">
+            <h3>{item}</h3>
+            <p className="text-3xl font-bold">0</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-xl shadow p-6">
+        <h2 className="text-2xl font-bold mb-4">Create News Article</h2>
+
+        <input
+          type="text"
+          placeholder="News Title"
+          className="w-full border rounded p-3 mb-4"
+          value={article.title}
+          onChange={(e) => setArticle({ ...article, title: e.target.value })}
         />
-        
-        <input 
-          className="border p-3 rounded w-full mb-3 focus:outline-red-700" 
-          placeholder="Password" 
-          type="password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        
-        <button 
-          type="submit"
-          disabled={loading}
-          className="bg-red-700 hover:bg-red-800 disabled:bg-gray-400 text-white p-3 rounded w-full font-bold transition-colors"
+
+        <select
+          className="w-full border rounded p-3 mb-4"
+          value={article.category}
+          onChange={(e) => setArticle({ ...article, category: e.target.value })}
         >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
-    </main>
+          <option>Politics</option>
+          <option>National</option>
+          <option>Sports</option>
+          <option>Technology</option>
+          <option>Business</option>
+          <option>Entertainment</option>
+          <option>Crime</option>
+          <option>Education</option>
+        </select>
+
+        <textarea
+          rows="12"
+          placeholder="Write complete article..."
+          className="w-full border rounded p-3 mb-4"
+          value={article.content}
+          onChange={(e) => setArticle({ ...article, content: e.target.value })}
+        />
+
+        <div className="mb-4">
+          <label className="font-semibold block mb-2">Upload Image</label>
+          <input type="file" accept="image/*" onChange={(e) => setArticle({ ...article, image: e.target.files[0] })} />
+        </div>
+
+        <div className="mb-6">
+          <label className="font-semibold block mb-2">Upload Video</label>
+          <input type="file" accept="video/*" onChange={(e) => setArticle({ ...article, video: e.target.files[0] })} />
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <button className="bg-gray-700 text-white px-5 py-3 rounded">Save Draft</button>
+          <button
+            onClick={handlePublish}
+            disabled={loading}
+            className={`px-5 py-3 rounded text-white ${loading ? "bg-blue-300" : "bg-blue-600"}`}
+          >
+            {loading ? "Publishing..." : "Publish Website Only"}
+          </button>
+          <button className="bg-red-600 text-white px-5 py-3 rounded">Publish Everywhere</button>
+        </div>
+      </div>
+    </div>
   );
 }

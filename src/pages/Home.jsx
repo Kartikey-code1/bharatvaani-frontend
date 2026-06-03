@@ -11,18 +11,23 @@ function Home() {
   const activeCategory = searchParams.get("category") || "All";
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/articles")
+    // FIX: Localhost hatakar live Render backend URL ka use kiya hai
+    fetch("https://bharatvaani-backend.onrender.com/api/articles")
       .then((res) => res.json())
       .then((data) => {
+        // Backend se aaye data ko verify kiya
         if (Array.isArray(data)) {
           setNews(data);
+        } else if (data.articles && Array.isArray(data.articles)) {
+          // Agar backend 'data.articles' field bhej raha hai
+          setNews(data.articles);
         } else {
           setNews([]);
         }
         setLoading(false);
       })
       .catch((error) => {
-        console.log("FETCH ERROR:", error);
+        console.error("FETCH ERROR:", error);
         setLoading(false);
       });
   }, []);

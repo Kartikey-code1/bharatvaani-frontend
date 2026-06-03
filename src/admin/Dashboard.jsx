@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   const handlePublish = async () => {
     if (!article.title || !article.content) {
-      alert("Title aur Content zaroori hai!");
+      alert("⚠️ Title aur Content fill karna zaroori hai!");
       return;
     }
 
@@ -26,19 +26,16 @@ export default function Dashboard() {
       if (article.image) formData.append("image", article.image);
       if (article.video) formData.append("video", article.video);
 
-      // Backend ka live URL use karein
-      const response = await fetch(
-        "https://bharatvaani-backend.onrender.com/api/articles",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      // Fixed: Relative path use kiya hai taaki deployment mein 404 na aaye
+      const response = await fetch("/api/articles", {
+        method: "POST",
+        body: formData,
+      });
 
       const data = await response.json();
 
-      if (data.success) {
-        alert("✅ Article Published Successfully");
+      if (response.ok && data.success) {
+        alert("✅ Article Published Successfully!");
         setArticle({
           title: "",
           category: "Politics",
@@ -47,10 +44,10 @@ export default function Dashboard() {
           video: null,
         });
       } else {
-        alert(data.message || "❌ Publish Failed");
+        alert(data.message || "❌ Publish Failed: Backend error");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Fetch Error:", error);
       alert("❌ Server Error: Backend se connect nahi ho pa raha.");
     } finally {
       setLoading(false);
@@ -61,7 +58,6 @@ export default function Dashboard() {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6">Admin Dashboard</h1>
 
-      {/* Stats Grid */}
       <div className="grid md:grid-cols-4 gap-4 mb-8">
         {["Total Articles", "Published", "Drafts", "Subscribers"].map((item) => (
           <div key={item} className="bg-white shadow rounded-xl p-4">
@@ -71,7 +67,6 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Create Article Form */}
       <div className="bg-white rounded-xl shadow p-6">
         <h2 className="text-2xl font-bold mb-4">Create News Article</h2>
 
