@@ -7,7 +7,8 @@ function Article() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/articles/${id}`)
+    // Localhost hata kar tumhara live Render URL daal diya hai
+    fetch(`https://bharatvaani-backend.onrender.com/api/articles/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setArticle(data);
