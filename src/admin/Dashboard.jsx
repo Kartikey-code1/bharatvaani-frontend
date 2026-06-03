@@ -26,15 +26,16 @@ export default function Dashboard() {
       if (article.image) formData.append("image", article.image);
       if (article.video) formData.append("video", article.video);
 
-      // Fixed: Relative path use kiya hai taaki deployment mein 404 na aaye
-      const response = await fetch("/api/articles", {
+      // FIXED: Relative path hata kar Live Render Backend ka URL daal diya hai
+      const response = await fetch("https://bharatvaani-backend.onrender.com/api/articles", {
         method: "POST",
         body: formData,
       });
 
       const data = await response.json();
 
-      if (response.ok && data.success) {
+      // Frontend response handle karne ke liye check
+      if (response.ok) {
         alert("✅ Article Published Successfully!");
         setArticle({
           title: "",
@@ -58,6 +59,7 @@ export default function Dashboard() {
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-6">Admin Dashboard</h1>
 
+      {/* Stats Grid */}
       <div className="grid md:grid-cols-4 gap-4 mb-8">
         {["Total Articles", "Published", "Drafts", "Subscribers"].map((item) => (
           <div key={item} className="bg-white shadow rounded-xl p-4">
@@ -67,6 +69,7 @@ export default function Dashboard() {
         ))}
       </div>
 
+      {/* Create Article Form */}
       <div className="bg-white rounded-xl shadow p-6">
         <h2 className="text-2xl font-bold mb-4">Create News Article</h2>
 
@@ -120,7 +123,7 @@ export default function Dashboard() {
           >
             {loading ? "Publishing..." : "Publish Website Only"}
           </button>
-          <button className="bg-red-600 text-white px-5 py-3 rounded">Publish Everywhere</button>
+          <button onClick={handlePublish} className="bg-red-600 text-white px-5 py-3 rounded">Publish Everywhere</button>
         </div>
       </div>
     </div>
