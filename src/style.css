@@ -2,22 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html,
 body,
-#root{
-  width:100%;
-  min-height:100vh;
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Body aur Root dono par overflow hidden karo */
 }
 
-body{
-  font-family:Inter, Arial, sans-serif;
-  background:#f8fafc;
-  color:#0f172a;
-  overflow-x:hidden;
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f8fafc;
+  color: #333; /* Maine yahan blackish color kiya hai, white text `f8fafc` background par dikhega nahi */
+  width: 100vw; /* Strict width control */
+  position: relative;
 }
