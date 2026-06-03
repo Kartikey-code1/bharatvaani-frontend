@@ -13,12 +13,11 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      // Ab hum 'fetch' ki jagah 'api' ka use kar rahe hain
-      // baseURL api.js se automatically aa jayega
-      const response = await api.post("/admin/login", { 
-        email, 
-        password 
-      });
+     // AdminLogin.jsx ke andar:
+const response = await api.post("/api/admin/login", { 
+  email, 
+  password 
+});
 
       // Axios mein response data seedha .data mein hota hai
       const data = response.data;
