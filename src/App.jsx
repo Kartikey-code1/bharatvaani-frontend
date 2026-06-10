@@ -16,7 +16,7 @@ import ArticlesList from "./admin/ArticlesList.jsx";
 import ContactMessages from "./admin/ContactMessages.jsx";
 import Subscribers from "./admin/Subscribers.jsx";
 import SocialStatus from "./admin/SocialStatus.jsx";
-
+import ManageNews from "./pages/ManageNews";
 export default function App() {
   return (
     <>
@@ -37,6 +37,7 @@ export default function App() {
         <Route path="/admin/messages" element={<ContactMessages />} />
         <Route path="/admin/subscribers" element={<Subscribers />} />
         <Route path="/admin/social" element={<SocialStatus />} />
+        <Route path="/admin/manage" element={<ManageNews />} />
       </Routes>
       <Footer />
     </>
