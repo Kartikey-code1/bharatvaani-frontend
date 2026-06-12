@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
+// 👑 1. Apne assets folder se direct logo import karo
+import realLogo from '../assets/logo.png'; // 🔥 Apne folder path ke hisab se ise sahi kar lena
 
 export default function NewsCard({ item }) {
   const hasVideo = item.video && item.video.trim() !== "";
-  
   const defaultPlaceholder = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop"; 
-  
-  // 🔥 BHARATVAANI PRANGAN LOGO LINK (Circular and structured wrapper)
-  // Tip: Tumhara jo main logo hai (green/orange text wala), uski transparent PNG link yahan replace kar sakte ho
-  const bharatvaaniLogo = "https://i.ibb.co/6N69wVJ/bharatvaani-logo.png"; 
 
   return (
     <article className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden flex flex-col h-full group relative">
@@ -15,15 +12,12 @@ export default function NewsCard({ item }) {
       {/* Media Window Container */}
       <div className="w-full h-52 overflow-hidden bg-black relative">
         
-        {/* 👑 LOGO WATERMARK MASK OVERLAP ENGINE:
-            Yeh div ekदम exact top-right area ko occupy karega jahan external channel logo aa raha hai.
-            Isme p-1.5 aur custom size unke brand banner ko completely mask (chupa) dega. */}
-        <div className="absolute top-2 right-2 z-40 bg-white border border-gray-200 p-1 rounded-full shadow-lg transition-transform duration-300 group-hover:scale-110 flex items-center justify-center">
+        {/* 👑 BHARATVAANI LOGO OVERLAP MASK */}
+        <div className="absolute top-2 right-2 z-40 bg-white p-1 rounded-full shadow-lg flex items-center justify-center border border-gray-100">
           <img 
-            src={bharatvaaniLogo} 
+            src={realLogo} // 👈 Yahan local imported logo set ho gaya
             alt="Bharatvaani" 
-            className="w-9 h-9 object-contain rounded-full"
-            onError={(e) => { e.target.parentNode.style.display = 'none'; }} 
+            className="w-8 h-8 object-contain rounded-full"
           />
         </div>
 
@@ -47,7 +41,7 @@ export default function NewsCard({ item }) {
         )}
       </div>
 
-      {/* Title/Category Description Body */}
+      {/* Description Body */}
       <div className="p-4 flex flex-col flex-grow justify-between">
         <div>
           <span className="text-xs font-bold text-red-700 uppercase tracking-wider">
