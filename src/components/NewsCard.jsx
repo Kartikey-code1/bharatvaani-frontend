@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function NewsCard({ item }) {
   const hasVideo = item.video && item.video.trim() !== "";
-  const defaultPlaceholder = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop"; 
+  const defaultPlaceholder = "C:\\Users\\karti\\Downloads\\BharatvaaniPrangan\\frontend\\src\\assets\\logo.png.jpeg"; 
 
   return (
     <article className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden flex flex-col h-full group relative border border-gray-100">
