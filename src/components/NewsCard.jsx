@@ -11,19 +11,19 @@ export default function NewsCard({ item }) {
       {/* Media Window Container */}
       <div className="w-full h-52 overflow-hidden bg-black relative block">
         
-        {/* 👑 BHARATVAANI PERFECT SQUARE MASK 
-            - 'rounded-none' se border gol nahi hoga, ekदम chaukona box banega.
-            - Width ko 'w-16' (64px) aur height ko 'h-8' (32px) kiya hai taaki ABP ka lamba text completely hide ho jaye.
-            - Right aur Top ko 'right-0 top-0' kiya hai taaki edge to edge block kare. */}
+        {/* 👑 BHARATVAANI ULTIMATE SQUARE MASK ENGINE
+            - Isko 'top-0 right-0' se layout ki boundary line se exact lock kiya hai.
+            - Size thoda expand karke w-[75px] aur h-[38px] kiya hai taaki external badges completely mask ho jayein.
+            - Background pure white ('bg-white') hai aur corners flat sharp ('rounded-none') hain.
+            - Inside image 'object-fill' ya 'object-cover' hai taaki full width use ho. */}
         <div 
-          className="absolute top-0 right-0 z-50 bg-white p-0.5 shadow-md flex items-center justify-center border-l border-b border-gray-200 rounded-none"
-          style={{ width: '68px', height: '34px', minWidth: '68px', minHeight: '34px' }}
+          className="absolute top-0 right-0 z-50 bg-white p-1 shadow-md flex items-center justify-center border-l border-b border-gray-200 rounded-none overflow-hidden"
+          style={{ width: '75px', height: '38px', minWidth: '75px', minHeight: '38px' }}
         >
           <img 
             src={brandLogo} 
             alt="Bharatvaani" 
-            className="w-full h-full object-contain rounded-none"
-            style={{ display: 'block' }}
+            className="w-full h-full object-contain rounded-none block"
           />
         </div>
 
