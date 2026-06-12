@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+// 👑 FIX: Logo asset ko top par import kiya full view ke liye
+import brandLogo from "../assets/logo.png";
 
 function Article() {
   const { id } = useParams();
@@ -65,22 +67,50 @@ function Article() {
             : "ताज़ा समाचार"}
         </p>
 
-        {/* Image */}
+        {/* 👑 Image With Logo Mask */}
         {article.image && (
-          <img
-            src={article.image}
-            alt={article.title}
-            className="w-full rounded-xl mb-6 object-cover max-h-96"
-          />
+          <div className="relative w-full rounded-xl overflow-hidden mb-6 bg-black block">
+            {/* Edge-to-edge Custom Borderless Mask */}
+            <div 
+              className="absolute top-0 right-0 z-50 bg-transparent p-0 flex items-center justify-center rounded-none overflow-hidden"
+              style={{ width: '85px', height: '42px', minWidth: '85px', minHeight: '42px' }}
+            >
+              <img 
+                src={brandLogo} 
+                alt="Bharatvaani" 
+                className="w-full h-full object-cover rounded-none block"
+                style={{ backgroundColor: 'transparent' }} 
+              />
+            </div>
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full object-cover max-h-96 block"
+            />
+          </div>
         )}
 
-        {/* Video */}
+        {/* 👑 Video With Logo Mask */}
         {article.video && (
-          <video
-            src={article.video}
-            controls
-            className="w-full rounded-xl mb-6 max-h-96"
-          />
+          <div className="relative w-full rounded-xl overflow-hidden mb-6 bg-black block">
+            {/* Edge-to-edge Custom Borderless Mask */}
+            <div 
+              className="absolute top-0 right-0 z-50 bg-transparent p-0 flex items-center justify-center rounded-none overflow-hidden"
+              style={{ width: '85px', height: '42px', minWidth: '85px', minHeight: '42px' }}
+            >
+              <img 
+                src={brandLogo} 
+                alt="Bharatvaani" 
+                className="w-full h-full object-cover rounded-none block"
+                style={{ backgroundColor: 'transparent' }} 
+              />
+            </div>
+            <video
+              src={article.video}
+              controls
+              className="w-full max-h-96 block relative z-10"
+            />
+          </div>
         )}
 
         {/* Content */}
