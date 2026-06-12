@@ -16,7 +16,7 @@ import ArticlesList from "./admin/ArticlesList.jsx";
 import ContactMessages from "./admin/ContactMessages.jsx";
 import Subscribers from "./admin/Subscribers.jsx";
 import SocialStatus from "./admin/SocialStatus.jsx";
-import ManageNews from "./pages/ManageNews";
+import ManageNews from "./pages/Managenews.jsx";
 export default function App() {
   return (
     <>
