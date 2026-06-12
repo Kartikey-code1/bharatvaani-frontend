@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+// 👑 FIX: src/assets/logo.png ko upar import kar liya taaki dynamic build broke na ho
+import brandLogo from '../assets/logo.png'; 
 
 export default function NewsCard({ item }) {
   const hasVideo = item.video && item.video.trim() !== "";
-  const defaultPlaceholder = "C:\\Users\\karti\\Downloads\\BharatvaaniPrangan\\frontend\\src\\assets\\logo.png.jpeg"; 
+  
+  // Agal-bagal koi khabar bina image ke aaye toh default mein bhi tumhara logo chamkega
+  const defaultPlaceholder = brandLogo; 
 
   return (
     <article className="bg-white rounded-2xl shadow hover:shadow-lg overflow-hidden flex flex-col h-full group relative border border-gray-100">
@@ -10,15 +14,13 @@ export default function NewsCard({ item }) {
       {/* Media Window Container */}
       <div className="w-full h-52 overflow-hidden bg-black relative block">
         
-        {/* 👑 BHARATVAANI ABSOLUTE OVERLAP MASK 
-            Is wrapper ko explicit dimensions (w-12 h-12) de di hain taaki kisi bhi condition mein text/layout collapse na ho.
-            Public folder se logo fetch karne ke liye direct path root ('/logo.png') use ho raha hai. */}
+        {/* 👑 BHARATVAANI ABSOLUTE OVERLAP MASK */}
         <div 
           className="absolute top-2 right-2 z-50 bg-white p-1 rounded-full shadow-md flex items-center justify-center border border-gray-200"
           style={{ width: '44px', height: '44px', minWidth: '44px', minHeight: '44px' }}
         >
           <img 
-            src="/logo.png" 
+            src={brandLogo} // 👈 Imported asset logo file here
             alt="Bharatvaani" 
             className="w-full h-full object-contain rounded-full"
             style={{ display: 'block' }}
