@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async"; // 👑 Dynamic SEO Engine Import
 // 👑 FIX: Logo asset ko top par import kiya full view ke liye
 import brandLogo from "../assets/logo.png";
 
@@ -38,8 +39,34 @@ function Article() {
     );
   }
 
+  // Pure data parsing logic for description cleanup
+  const metaDescription = article.content || article.description 
+    ? (article.content || article.description).substring(0, 160).replace(/\n/g, " ") 
+    : "ताज़ा समाचार और ब्रेकिंग न्यूज़ - Bharatvaani News";
+
   return (
     <div className="bg-white min-h-screen">
+      
+      {/* 👑 ULTIMATE DYNAMIC SEO METADATA ZONE */}
+      <Helmet>
+        <title>{article.title} | Bharatvaani News</title>
+        <meta name="description" content={metaDescription} />
+        
+        {/* Open Graph / Facebook / WhatsApp Preview Protocol */}
+        <meta property="og:title" content={`${article.title} | Bharatvaani News`} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={article.image || "https://bharatvaani-backend.onrender.com/assets/logo.png"} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:site_name" content="Bharatvaani News" />
+        
+        {/* Twitter Structural Layout Preview Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={article.title} />
+        <meta name="twitter:description" content={metaDescription} />
+        <meta name="twitter:image" content={article.image || "https://bharatvaani-backend.onrender.com/assets/logo.png"} />
+      </Helmet>
+
       <div className="max-w-3xl mx-auto px-4 py-8">
 
         {/* Back Button */}
