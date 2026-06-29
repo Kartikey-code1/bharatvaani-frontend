@@ -1,82 +1,93 @@
-/* =======================
-   LATEST NEWS SIDEBAR
-======================= */
+/* ==========================
+   FEATURED NEWS
+========================== */
 
-.latest-news{
+.featured-section{
+    margin-top:50px;
+}
+
+.featured-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.featured-card{
     background:#fff;
     border-radius:12px;
     overflow:hidden;
-    box-shadow:0 3px 15px rgba(0,0,0,.08);
-}
-
-.latest-header{
-    background:#c40000;
-    color:#fff;
-    padding:16px;
-    font-size:22px;
-    font-weight:700;
-}
-
-.latest-item{
-    display:flex;
-    gap:12px;
-    padding:15px;
     text-decoration:none;
     color:#222;
-    border-bottom:1px solid #ececec;
+    box-shadow:0 4px 18px rgba(0,0,0,.08);
     transition:.3s;
 }
 
-.latest-item:hover{
-    background:#fafafa;
+.featured-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-.latest-item img{
-    width:110px;
-    height:80px;
+.featured-image{
+    position:relative;
+}
+
+.featured-image img{
+    width:100%;
+    height:220px;
     object-fit:cover;
-    border-radius:8px;
-    flex-shrink:0;
 }
 
-.latest-content{
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-}
-
-.latest-category{
-    color:#c40000;
+.featured-category{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#d90429;
+    color:#fff;
+    padding:6px 12px;
     font-size:12px;
     font-weight:700;
-    text-transform:uppercase;
+    border-radius:4px;
 }
 
-.latest-content h4{
-    margin:6px 0;
-    font-size:16px;
+.featured-content{
+    padding:18px;
+}
+
+.featured-content h3{
+    font-size:20px;
+    margin-bottom:10px;
     line-height:1.4;
     font-weight:700;
 }
 
-.latest-content small{
-    color:#777;
+.featured-content p{
+    color:#666;
+    font-size:15px;
+    line-height:1.6;
+    margin-bottom:15px;
+}
+
+.featured-content small{
+    color:#999;
     font-size:13px;
 }
 
-@media(max-width:992px){
+@media(max-width:1200px){
 
-.latest-news{
-margin-top:25px;
+.featured-grid{
+grid-template-columns:repeat(2,1fr);
 }
 
-.latest-item img{
-width:90px;
-height:70px;
 }
 
-.latest-content h4{
-font-size:15px;
+@media(max-width:768px){
+
+.featured-grid{
+grid-template-columns:1fr;
+}
+
+.featured-image img{
+height:240px;
 }
 
 }
