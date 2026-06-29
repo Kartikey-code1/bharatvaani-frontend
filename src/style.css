@@ -1,25 +1,82 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =======================
+   LATEST NEWS SIDEBAR
+======================= */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.latest-news{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden; /* Body aur Root dono par overflow hidden karo */
+.latest-header{
+    background:#c40000;
+    color:#fff;
+    padding:16px;
+    font-size:22px;
+    font-weight:700;
 }
 
-body {
-  font-family: Inter, Arial, sans-serif;
-  background: #f8fafc;
-  color: #333; /* Maine yahan blackish color kiya hai, white text `f8fafc` background par dikhega nahi */
-  width: 100vw; /* Strict width control */
-  position: relative;
+.latest-item{
+    display:flex;
+    gap:12px;
+    padding:15px;
+    text-decoration:none;
+    color:#222;
+    border-bottom:1px solid #ececec;
+    transition:.3s;
+}
+
+.latest-item:hover{
+    background:#fafafa;
+}
+
+.latest-item img{
+    width:110px;
+    height:80px;
+    object-fit:cover;
+    border-radius:8px;
+    flex-shrink:0;
+}
+
+.latest-content{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.latest-category{
+    color:#c40000;
+    font-size:12px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.latest-content h4{
+    margin:6px 0;
+    font-size:16px;
+    line-height:1.4;
+    font-weight:700;
+}
+
+.latest-content small{
+    color:#777;
+    font-size:13px;
+}
+
+@media(max-width:992px){
+
+.latest-news{
+margin-top:25px;
+}
+
+.latest-item img{
+width:90px;
+height:70px;
+}
+
+.latest-content h4{
+font-size:15px;
+}
+
 }

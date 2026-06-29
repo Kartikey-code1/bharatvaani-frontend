@@ -1,1 +1,0 @@
-export default function TrendingNews({items=[]}){return <aside className="bg-white rounded-2xl shadow p-5"><h2 className="font-black text-xl mb-4">Trending News</h2>{items.map((n,i)=><div key={i} className="border-b py-3"><b>{n.headline}</b><p className="text-sm text-slate-500">{n.category}</p></div>)}</aside>}

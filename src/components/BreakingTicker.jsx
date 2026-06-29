@@ -1,1 +1,0 @@
-export default function BreakingTicker(){return <div className="bg-red-700 text-white"><div className="max-w-7xl mx-auto px-4 py-2 flex gap-3"><b>BREAKING</b><span className="truncate">Bharatvaani Prangan पर पढ़ें ताजा, भरोसेमंद और people-focused journalism.</span></div></div>}
