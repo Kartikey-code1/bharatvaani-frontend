@@ -1,87 +1,112 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FiChevronDown } from 'react-icons/fi';
 
-const cats = [
-  "Politics",
-  "National",
-  "Sports",
-  "Entertainment",
-  "Business",
-  "Technology",
-  "Crime",
-  "Education",
-];
+const Navbar = () => {
+  const [isNewsOpen, setIsNewsOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
-export default function Navbar() {
-  const navigate = useNavigate();
+  const categoriesList = [
+    'Politics', 'National', 'Environment', 'Business', 'Technology', 
+    'Sports', 'Entertainment', 'Lifestyle', 'Crime', 'Education'
+  ];
 
   return (
-    <header className="bg-white shadow sticky top-0 z-50 border-b border-gray-200">
-      
-      {/* TOP HEADER */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between">
+    <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
         
-        {/* LOGO */}
-        <Link to="/" className="flex items-center gap-3">
-          <div className="leading-none">
-            <h1 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight">
-              <span className="text-orange-500">भारत</span>
-              <span className="mx-1"></span>
-              <span className="text-green-600">वाणी</span>
-            </h1>
-
-            <div className="ml-10 sm:ml-14 md:ml-20 -mt-1">
-              <span className="text-green-500 text-lg sm:text-xl md:text-2xl font-black">
-                प्रांगण
-              </span>
+        {/* LOGO GROUP */}
+        <Link to="/" className="flex items-center space-x-3 cursor-pointer">
+          <div className="relative flex items-center justify-center w-12 h-12 bg-red-600 rounded-full text-white font-bold text-xl tracking-wider shadow-md">
+            <span className="font-serif">B</span>
+            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 rounded-full border-2 border-white flex items-center justify-center text-[10px]">
+              P
             </div>
+          </div>
+          <div className="flex flex-col justify-center">
+            <h1 className="text-2xl font-black tracking-tight text-slate-900 leading-none font-sans">
+              BHARATVAANI
+            </h1>
+            <h2 className="text-xl font-extrabold tracking-widest text-red-600 leading-none mt-1">
+              PRANGAN
+            </h2>
           </div>
         </Link>
 
-        {/* DESKTOP NAV */}
-        <nav className="hidden md:flex gap-6 text-sm font-semibold text-black">
-          <Link
-            to="/about"
-            className="hover:text-red-600 transition"
-          >
-            About
+        {/* NAVIGATION LINKS */}
+        <nav className="hidden lg:flex items-center space-x-8 font-sans">
+          <Link to="/" className="text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1 tracking-wide">
+            HOME
           </Link>
+          
+          {/* News Trigger */}
+          <div className="relative">
+            <button 
+              onClick={() => { setIsNewsOpen(!isNewsOpen); setIsCategoriesOpen(false); }}
+              className="flex items-center space-x-1 text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase"
+            >
+              <span>News</span>
+              <FiChevronDown className={`w-4 h-4 transition-transform ${isNewsOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isNewsOpen && (
+              <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-100 rounded-md shadow-lg py-2 z-50">
+                <Link to="/news/breaking" onClick={() => setIsNewsOpen(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-bold hover:text-red-600">
+                  Breaking News
+                </Link>
+                <Link to="/news/top-stories" onClick={() => setIsNewsOpen(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-bold hover:text-red-600">
+                  Top Stories
+                </Link>
+              </div>
+            )}
+          </div>
 
-          <Link
-            to="/contact"
-            className="hover:text-red-600 transition"
-          >
-            Contact
+          {/* Categories Dropdown Trigger */}
+          <div className="relative">
+            <button 
+              onClick={() => { setIsCategoriesOpen(!isCategoriesOpen); setIsNewsOpen(false); }}
+              className="flex items-center space-x-1 text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase"
+            >
+              <span>Categories</span>
+              <FiChevronDown className={`w-4 h-4 transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {isCategoriesOpen && (
+              <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-gray-100 rounded-md shadow-lg py-2 grid grid-cols-1 z-50">
+                {categoriesList.map((cat, idx) => (
+                  <Link 
+                    key={idx} 
+                    to={`/category/${cat.toLowerCase()}`}
+                    onClick={() => setIsCategoriesOpen(false)}
+                    className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-medium hover:text-red-600"
+                  >
+                    {cat}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link to="/videos" className="text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase">
+            Videos
+          </Link>
+          <Link to="/about" className="text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase">
+            About Us
           </Link>
         </nav>
-      </div>
 
-      {/* CATEGORY BAR */}
-      <div className="border-t bg-white overflow-x-auto">
-        <div className="max-w-7xl mx-auto flex gap-4 px-3 sm:px-4 py-3 text-sm whitespace-nowrap">
-          {cats.map((c) => (
-            <button
-              key={c}
-              onClick={() => navigate(`/?category=${c}`)}
-              className="text-black hover:text-red-600 transition font-medium"
-            >
-              {c}
-            </button>
-          ))}
+        {/* Live TV */}
+        <div className="flex items-center">
+          <Link to="/live-tv" className="relative overflow-hidden bg-red-600 hover:bg-red-700 text-white font-sans font-extrabold text-xs tracking-wider px-5 py-2.5 rounded-md shadow-md shadow-red-200 uppercase transition-all flex items-center space-x-1.5">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </span>
+            <span>Live TV</span>
+          </Link>
         </div>
-      </div>
 
-      {/* BREAKING NEWS */}
-      <div className="bg-gradient-to-r from-red-700 to-red-900 overflow-hidden py-2">
-        <div className="max-w-7xl mx-auto flex items-center px-3 sm:px-4">
-          <span className="text-white font-bold text-xs sm:text-sm mr-3 shrink-0">
-            BREAKING
-          </span>
-
-          <p className="text-white text-xs sm:text-sm whitespace-nowrap overflow-hidden text-ellipsis">
-            Bharatvaani Prangan पर पढ़ें ताज़ा, भरोसेमंद और people-focused journalism.
-          </p>
-        </div>
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;

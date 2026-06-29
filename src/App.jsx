@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
+import SubNavbar from "./components/SubNavbar.jsx"; // 🔥 Yahan import add kiya
 import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home.jsx";
 import Article from "./pages/Article.jsx";
@@ -17,10 +18,13 @@ import ContactMessages from "./admin/ContactMessages.jsx";
 import Subscribers from "./admin/Subscribers.jsx";
 import SocialStatus from "./admin/SocialStatus.jsx";
 import ManageNews from "./pages/Managenews.jsx";
+
 export default function App() {
   return (
     <>
       <Navbar />
+      <SubNavbar /> {/* 🔥 Sub-navigation yahan render hoga */}
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category/:name" element={<Category />} />
