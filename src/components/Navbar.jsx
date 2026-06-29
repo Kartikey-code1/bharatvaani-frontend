@@ -15,31 +15,53 @@ const Navbar = () => {
     <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
         
-        {/* LOGO GROUP */}
-        <Link to="/" className="flex items-center space-x-3 cursor-pointer">
+        {/* 1. BRANDING LOGO SECTION (NEW DESIGN MATCH) */}
+        <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
+          {/* Logo Icon Element */}
           <div className="relative flex items-center justify-center w-12 h-12 bg-red-600 rounded-full text-white font-bold text-xl tracking-wider shadow-md">
             <span className="font-serif">B</span>
             <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-slate-900 rounded-full border-2 border-white flex items-center justify-center text-[10px]">
               P
             </div>
           </div>
-          <div className="flex flex-col justify-center">
-            <h1 className="text-2xl font-black tracking-tight text-slate-900 leading-none font-sans">
+          
+          {/* Updated Text Group matching the new typography & accents */}
+          <div className="flex flex-col items-center justify-center text-center">
+            <h1 className="text-[22px] font-black tracking-[0.03em] text-[#111827] leading-none uppercase font-sans">
               BHARATVAANI
             </h1>
-            <h2 className="text-xl font-extrabold tracking-widest text-red-600 leading-none mt-1">
-              PRANGAN
-            </h2>
+            
+            {/* Prangan with Triple Horizontal Accent Lines */}
+            <div className="flex items-center justify-between w-full mt-1 px-0.5">
+              {/* Left Accent Lines */}
+              <div className="flex flex-col space-y-[2px] w-3">
+                <div className="h-[2px] w-full bg-red-600"></div>
+                <div className="h-[2px] w-full bg-red-600"></div>
+                <div className="h-[2px] w-full bg-red-600"></div>
+              </div>
+              
+              {/* Center Text */}
+              <span className="text-[13px] font-black tracking-[0.38em] text-red-600 leading-none pl-1 uppercase font-sans">
+                PRANGAN
+              </span>
+              
+              {/* Right Accent Lines */}
+              <div className="flex flex-col space-y-[2px] w-3">
+                <div className="h-[2px] w-full bg-red-600"></div>
+                <div className="h-[2px] w-full bg-red-600"></div>
+                <div className="h-[2px] w-full bg-red-600"></div>
+              </div>
+            </div>
           </div>
         </Link>
 
-        {/* NAVIGATION LINKS */}
+        {/* 2. NAVIGATION LINKS ELEMENT */}
         <nav className="hidden lg:flex items-center space-x-8 font-sans">
           <Link to="/" className="text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1 tracking-wide">
             HOME
           </Link>
           
-          {/* News Trigger */}
+          {/* News Dropdown */}
           <div className="relative">
             <button 
               onClick={() => { setIsNewsOpen(!isNewsOpen); setIsCategoriesOpen(false); }}
@@ -60,7 +82,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Categories Dropdown Trigger */}
+          {/* Categories Dropdown */}
           <div className="relative">
             <button 
               onClick={() => { setIsCategoriesOpen(!isCategoriesOpen); setIsNewsOpen(false); }}
@@ -74,7 +96,7 @@ const Navbar = () => {
                 {categoriesList.map((cat, idx) => (
                   <Link 
                     key={idx} 
-                    to={`/category/${cat.toLowerCase()}`}
+                    to={`/category/${cat}`}
                     onClick={() => setIsCategoriesOpen(false)}
                     className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-medium hover:text-red-600"
                   >
@@ -93,7 +115,7 @@ const Navbar = () => {
           </Link>
         </nav>
 
-        {/* Live TV */}
+        {/* 3. ACTION RIGHT PANEL */}
         <div className="flex items-center">
           <Link to="/live-tv" className="relative overflow-hidden bg-red-600 hover:bg-red-700 text-white font-sans font-extrabold text-xs tracking-wider px-5 py-2.5 rounded-md shadow-md shadow-red-200 uppercase transition-all flex items-center space-x-1.5">
             <span className="relative flex h-2 w-2">
