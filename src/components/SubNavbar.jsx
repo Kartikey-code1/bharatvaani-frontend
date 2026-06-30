@@ -5,18 +5,9 @@ import { FiHome } from 'react-icons/fi';
 const SubNavbar = () => {
   const location = useLocation();
   
-  // 1. EXACT match matching your dropdown and actual database categories
   const inlineCategories = [
-    'Politics', 
-    'National', 
-    'Environment', // <-- 'World' ki jagah 'Environment' kiya jo dropdown mein hai
-    'Business', 
-    'Technology', 
-    'Sports', 
-    'Entertainment', 
-    'Lifestyle', 
-    'Crime', 
-    'Education'
+    'Politics', 'National', 'Environment', 'Business', 'Technology', 
+    'Sports', 'Entertainment', 'Lifestyle', 'Crime', 'Education'
   ];
 
   return (
@@ -34,11 +25,8 @@ const SubNavbar = () => {
         {/* Categories Link Row */}
         <div className="flex items-center font-sans whitespace-nowrap text-xs font-black tracking-wider uppercase">
           {inlineCategories.map((category, index) => {
-            
-            // 🔥 BACKEND COMPATIBILITY CHECK: 
-            // Agar click karne par abhi bhi data na dikhe, toh tumhare backend route ko lower-case pasand ho sakta hai.
-            // Us case mein tum niche `category` ki jagah `category.toLowerCase()` kar sakte ho.
-            const currentPath = `/category/${category}`;
+            // 🔥 URL mein lowercase bhej rahe hain backend data matching ke liye
+            const currentPath = `/category/${category.toLowerCase()}`;
             const isActive = location.pathname === currentPath;
 
             return (

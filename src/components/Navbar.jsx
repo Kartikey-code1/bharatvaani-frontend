@@ -4,18 +4,12 @@ import { FiChevronDown } from 'react-icons/fi';
 
 const Navbar = () => {
   const [isNewsOpen, setIsNewsOpen] = useState(false);
-  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
-
-  const categoriesList = [
-    'Politics', 'National', 'Environment', 'Business', 'Technology', 
-    'Sports', 'Entertainment', 'Lifestyle', 'Crime', 'Education'
-  ];
 
   return (
     <header className="w-full bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
         
-        {/* 1. BRANDING LOGO SECTION (NEW DESIGN MATCH) */}
+        {/* 1. BRANDING LOGO SECTION */}
         <Link to="/" className="flex items-center space-x-3 cursor-pointer group">
           {/* Logo Icon Element */}
           <div className="relative flex items-center justify-center w-12 h-12 bg-red-600 rounded-full text-white font-bold text-xl tracking-wider shadow-md">
@@ -25,7 +19,7 @@ const Navbar = () => {
             </div>
           </div>
           
-          {/* Updated Text Group matching the new typography & accents */}
+          {/* Text Group */}
           <div className="flex flex-col items-center justify-center text-center">
             <h1 className="text-[22px] font-black tracking-[0.03em] text-[#111827] leading-none uppercase font-sans">
               BHARATVAANI
@@ -55,7 +49,7 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* 2. NAVIGATION LINKS ELEMENT */}
+        {/* 2. NAVIGATION LINKS (CATEGORIES REMOVED) */}
         <nav className="hidden lg:flex items-center space-x-8 font-sans">
           <Link to="/" className="text-sm font-bold text-red-600 border-b-2 border-red-600 pb-1 tracking-wide">
             HOME
@@ -64,7 +58,7 @@ const Navbar = () => {
           {/* News Dropdown */}
           <div className="relative">
             <button 
-              onClick={() => { setIsNewsOpen(!isNewsOpen); setIsCategoriesOpen(false); }}
+              onClick={() => setIsNewsOpen(!isNewsOpen)}
               className="flex items-center space-x-1 text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase"
             >
               <span>News</span>
@@ -78,31 +72,6 @@ const Navbar = () => {
                 <Link to="/news/top-stories" onClick={() => setIsNewsOpen(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-bold hover:text-red-600">
                   Top Stories
                 </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Categories Dropdown */}
-          <div className="relative">
-            <button 
-              onClick={() => { setIsCategoriesOpen(!isCategoriesOpen); setIsNewsOpen(false); }}
-              className="flex items-center space-x-1 text-sm font-bold text-slate-700 hover:text-red-600 transition-colors tracking-wide uppercase"
-            >
-              <span>Categories</span>
-              <FiChevronDown className={`w-4 h-4 transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {isCategoriesOpen && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-white border border-gray-100 rounded-md shadow-lg py-2 grid grid-cols-1 z-50">
-                {categoriesList.map((cat, idx) => (
-                  <Link 
-                    key={idx} 
-                    to={`/category/${cat}`}
-                    onClick={() => setIsCategoriesOpen(false)}
-                    className="block px-4 py-2 text-sm text-slate-700 hover:bg-gray-50 font-medium hover:text-red-600"
-                  >
-                    {cat}
-                  </Link>
-                ))}
               </div>
             )}
           </div>
