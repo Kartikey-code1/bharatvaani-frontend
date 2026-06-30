@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // 👑 Dynamic SEO Engine Import
 // 👑 FIX: Logo asset ko top par import kiya full view ke liye
-import brandLogo from "../assets/logo.png";
+import brandLogo from "../assets/logo.jpeg";
 
 function Article() {
   const { id } = useParams();
