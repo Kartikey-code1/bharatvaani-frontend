@@ -13,9 +13,10 @@ export default function Category() {
       setLoading(true);
       setError(null);
       try {
-        // Tumhare hosted environment ki category filtering API
-        // Agar absolute URL lagana ho toh `/api/articles...` ya jo bhi tumhara custom route hai use update kar sakte ho
-        const response = await fetch(`/api/articles/category/${name}`);
+        // 🔥 FIX 1: URL parameter ko uppercase (.toUpperCase()) kiya taaki NATIONAL/POLITICS database se match ho
+        // 🔥 FIX 2: window.location.origin add kiya taaki hosted environment mein path tootey nahi
+        const categoryParam = name ? name.toUpperCase() : '';
+        const response = await fetch(`${window.location.origin}/api/articles/category/${categoryParam}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch articles');
@@ -31,8 +32,10 @@ export default function Category() {
       }
     };
 
-    fetchCategoryNews();
-  }, [name]); // Jab bhi category ka 'name' change hoga, ye fetch function fir se run hoga
+    if (name) {
+      fetchCategoryNews();
+    }
+  }, [name]); 
 
   return (
     <main className="max-w-7xl mx-auto p-4 min-h-[60vh]">
@@ -44,7 +47,7 @@ export default function Category() {
       {/* Loading Skeleton state */}
       {loading && (
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 animate-pulse mt-4">
-          {[1, 2, 4, 4].map((n) => (
+          {[1, 2, 3, 4].map((n) => (
             <div key={n} className="bg-gray-200 h-72 rounded-lg"></div>
           ))}
         </div>
@@ -67,7 +70,7 @@ export default function Category() {
       ) : (
         !loading && !error && (
           <div className="text-center py-12 text-gray-400 font-medium">
-            इस कैटेगरी में अभी कोई समाचार उपलब्ध नहीं है।
+            No news in this category.
           </div>
         )
       )}
